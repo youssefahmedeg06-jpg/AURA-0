@@ -1,10 +1,10 @@
 {
   "name": {
-    "ar": "أورا",
-    "en": "AURA"
+    "ar": "أورا لمتاجر المجوهرات",
+    "en": "AURA Jewelry Theme"
   },
-  "repository": "https://github.com/SallaApp/theme-raed",
-  "author_email": "support@salla.sa",
+  "repository": "https://github.com/youssefahmedeg06-jpg/AURA-0",
+  "author_email": "youssef.ahmed.eg.06@gmail.com",
   "features": [
     "mega-menu",
     "fonts",
@@ -416,7 +416,7 @@
           "label": "صورة القطعة",
           "id": "image",
           "format": "image",
-          "required": true,
+          "required": false,
           "placeholder": null,
           "description": "* المقاس المناسب 1000×1000 بكسل (صورة مربعة)",
           "value": null,
@@ -688,7 +688,7 @@
               "label": "الصورة",
               "id": "items.image",
               "format": "image",
-              "required": true,
+              "required": false,
               "placeholder": null,
               "description": "* المقاس المناسب 600×600 بكسل",
               "value": null,
@@ -929,7 +929,7 @@
           "label": "الصورة",
           "id": "image",
           "format": "image",
-          "required": true,
+          "required": false,
           "placeholder": null,
           "description": "* المقاس المناسب 900×1100 بكسل (صورة طولية)",
           "value": null,
@@ -2034,9 +2034,9 @@
       ]
     }
   ],
-  "support_url": "https://salla.com/",
+  "support_url": "https://github.com/youssefahmedeg06-jpg/AURA-0",
   "description": {
     "ar": "ثيم مجوهرات يُحيط كل قطعة بهالة من الضوء: اسم المتجر يحتضن القطعة، وحلقات ضوء تتبع حركة الزائر.",
-    "en": "A jewelry theme that wraps every piece in a halo of light."
+    "en": "A jewelry theme that wraps every piece in a halo of light, with the store name holding the piece."
   }
 }

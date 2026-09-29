@@ -1,0 +1,31 @@
+{#
+| Variable              | Type    | Description                     |
+|-----------------------|---------|---------------------------------|
+| component.image       | string  | Portrait image                  |
+| component.title       | ?string |                                 |
+| component.text        | ?string |                                 |
+| component.button_text | ?string |                                 |
+| component.button_url  | ?string |                                 |
+| component.image_end   | bool    | Put the image on the other side |
+| component.night       | bool    | Dark background                 |
+| position              | int     | Sorting number start from zero  |
+#}
+<section component-id="{{ componentId }}" id="aura-story-{{ position }}"
+         class="s-block s-block--full-bg aura-story{{ component.night ? ' aura-story--night' }}{{ component.image_end ? ' aura-story--image-end' }}">
+    <div class="container aura-story__inner">
+        {% if component.image %}
+            <figure class="aura-story__media">
+                <img src="{{ component.image }}" alt="{{ component.title }}" loading="lazy" width="900" height="1100">
+            </figure>
+        {% endif %}
+        <div class="aura-story__copy">
+            {% if component.title %}<h2 class="aura-story__title">{{ component.title }}</h2>{% endif %}
+            {% if component.text %}<p class="aura-story__text">{{ component.text }}</p>{% endif %}
+            {% if component.button_text and component.button_url %}
+                <div class="aura-story__actions">
+                    <a class="aura-btn" href="{{ component.button_url }}">{{ component.button_text }}</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>

@@ -1,0 +1,47 @@
+{#
+| Variable              | Type    | Description                                                        |
+|-----------------------|---------|--------------------------------------------------------------------|
+| component.image       | string  | Piece image (square)                                               |
+| component.cutout      | bool    | Image has a transparent background: float it, no circular frame    |
+| component.title       | ?string |                                                                    |
+| component.text        | ?string |                                                                    |
+| component.button_text | ?string |                                                                    |
+| component.button_url  | ?string |                                                                    |
+| component.night       | bool    | Dark background                                                    |
+| position              | int     | Sorting number start from zero                                     |
+#}
+{% set wm = theme.settings.get('aura_wordmark', 'AURA')|default(store.name)|trim %}
+{% set is_latin = wm matches '/^[A-Za-z0-9 &.\'-]+$/' %}
+{% set half = ((wm|length) / 2)|round(0, 'ceil') %}
+{% set wm_start = wm|slice(0, half) %}
+{% set wm_end = wm|slice(half) %}
+
+<section component-id="{{ componentId }}" data-aura-hero id="aura-hero-{{ position }}"
+         class="s-block s-block--full-bg aura-hero{{ component.night ? ' aura-hero--night' }}{{ component.cutout ? ' aura-hero--cutout' }}">
+    <div class="aura-hero__mark{{ is_latin ? ' is-latin' }}" dir="{{ is_latin ? 'ltr' : 'rtl' }}">
+        <span class="aura-hero__letters" aria-hidden="true">{{ wm_start }}{% if not is_latin %}&zwj;{% endif %}</span>
+        <div class="aura-lens">
+            <span class="aura-lens__glow"></span>
+            <span class="aura-lens__ring"></span>
+            <span class="aura-lens__ring"></span>
+            <span class="aura-lens__ring"></span>
+            {% if component.image %}
+                <img class="aura-lens__img" src="{{ component.image }}" width="1000" height="1000"
+                     alt="{{ component.title|default(store.name) }}" fetchpriority="high" loading="eager">
+            {% endif %}
+        </div>
+        <span class="aura-hero__letters" aria-hidden="true">{% if not is_latin %}&zwj;{% endif %}{{ wm_end }}</span>
+    </div>
+
+    {% if component.title or component.text or component.button_text %}
+        <div class="container aura-hero__copy">
+            {% if component.title %}<h2 class="aura-hero__title">{{ component.title }}</h2>{% endif %}
+            {% if component.text %}<p class="aura-hero__text">{{ component.text }}</p>{% endif %}
+            {% if component.button_text and component.button_url %}
+                <div class="aura-hero__actions">
+                    <a class="aura-btn" href="{{ component.button_url }}">{{ component.button_text }}</a>
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+</section>

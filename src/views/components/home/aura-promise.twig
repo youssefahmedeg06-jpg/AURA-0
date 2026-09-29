@@ -1,0 +1,28 @@
+{#
+| Variable                | Type     | Description                     |
+|-------------------------|----------|---------------------------------|
+| component.title         | ?string  |                                 |
+| component.items         | object[] |                                 |
+| component.items[].icon  | string   | sicon class                     |
+| component.items[].title | ?string  |                                 |
+| component.items[].text  | ?string  |                                 |
+| position                | int      | Sorting number start from zero  |
+#}
+<section component-id="{{ componentId }}" id="aura-promise-{{ position }}" class="s-block s-block--full-bg aura-promise">
+    <div class="container">
+        {% if component.title %}
+            <header class="aura-head"><h2 class="aura-title">{{ component.title }}</h2></header>
+        {% endif %}
+        <ul class="aura-promise__list" role="list">
+            {% for item in component.items %}
+                <li class="aura-promise__item">
+                    <span class="aura-promise__mark" aria-hidden="true"><i class="{{ item.icon|default('sicon-file-badge') }}"></i></span>
+                    <div>
+                        {% if item.title %}<h3 class="aura-promise__title">{{ item.title }}</h3>{% endif %}
+                        {% if item.text %}<p class="aura-promise__text">{{ item.text }}</p>{% endif %}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>

@@ -1,0 +1,35 @@
+{#
+| Variable            | Type                  | Description                                      |
+|---------------------|-----------------------|--------------------------------------------------|
+| component.title     | ?string               |                                                  |
+| component.text      | ?string               |                                                  |
+| component.products  | Product[] *Collection | Empty = latest products                          |
+| component.all_url   | ?string               |                                                  |
+| position            | int                   | Sorting number start from zero                   |
+#}
+{% set all_url = component.all_url %}
+<section component-id="{{ componentId }}" id="aura-featured-{{ position }}" class="s-block aura-featured">
+    <div class="container">
+        <header class="aura-head">
+            <div>
+                {% if component.title %}<h2 class="aura-title">{{ component.title }}</h2>{% endif %}
+                {% if component.text %}<p class="aura-lede">{{ component.text }}</p>{% endif %}
+            </div>
+            {% if all_url and all_url != '#' %}
+                <a class="aura-link" href="{{ all_url }}">{{ trans('blocks.aura.view_all') }}</a>
+            {% endif %}
+        </header>
+        <div class="overflow-hidden">
+            <salla-products-slider
+                {% if component.products|length %}
+                    source="selected"
+                    source-value="[{{ component.products|map((product) => product.id)|join(',') }}]"
+                {% else %}
+                    source="latest"
+                {% endif %}
+                block-title=" "
+                slider-id="aura-featured-slider-{{ position }}"
+            ></salla-products-slider>
+        </div>
+    </div>
+</section>

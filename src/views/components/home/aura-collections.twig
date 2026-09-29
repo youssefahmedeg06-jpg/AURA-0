@@ -1,0 +1,43 @@
+{#
+| Variable                  | Type     | Description                     |
+|---------------------------|----------|---------------------------------|
+| component.title           | ?string  |                                 |
+| component.text            | ?string  |                                 |
+| component.shape           | string   | circle, arch, square            |
+| component.items           | object[] |                                 |
+| component.items[].image   | string   |                                 |
+| component.items[].title   | ?string  |                                 |
+| component.items[].url     | ?string  |                                 |
+| position                  | int      | Sorting number start from zero  |
+#}
+{# dropdown values may arrive as a plain value or as the selected option(s) #}
+{% set s = component.shape %}
+{% if s.value is defined %}{% set s = s.value %}{% elseif s is iterable %}{% set f = s|first %}{% set s = f.value ?? f %}{% endif %}
+{% set shape = s in ['circle', 'arch', 'square'] ? s : 'circle' %}
+
+<section component-id="{{ componentId }}" id="aura-collections-{{ position }}" class="s-block aura-collections">
+    <div class="container">
+        {% if component.title or component.text %}
+            <header class="aura-head">
+                <div>
+                    {% if component.title %}<h2 class="aura-title">{{ component.title }}</h2>{% endif %}
+                    {% if component.text %}<p class="aura-lede">{{ component.text }}</p>{% endif %}
+                </div>
+            </header>
+        {% endif %}
+        <ul class="aura-pieces aura-pieces--{{ shape }}" role="list">
+            {% for item in component.items %}
+                <li class="aura-piece">
+                    <a class="aura-piece__link" href="{{ item.url|default('#') }}">
+                        <span class="aura-piece__frame">
+                            {% if item.image %}
+                                <img src="{{ item.image }}" alt="" loading="lazy" width="600" height="600">
+                            {% endif %}
+                        </span>
+                        {% if item.title %}<span class="aura-piece__name">{{ item.title }}</span>{% endif %}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
